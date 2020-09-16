@@ -20,7 +20,7 @@ class UserViewModel extends ChangeNotifier {
   }
 
   login() async {
-    await userRepo.login("John doe");
+    await userRepo.login("ahmed nagy");
     await _refreshAllStates();
   }
 
