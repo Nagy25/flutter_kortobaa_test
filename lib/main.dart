@@ -1,21 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_kortobaa_test/themes/theme.dart';
+import 'package:provider/provider.dart';
 
+import 'blocs/providers/user_view_model.dart';
+import 'blocs/repositories/user_repository.dart';
 import 'ui/screens/home_screen/home_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
-  runApp(MyApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  SharedPreferences.setMockInitialValues({});
+
+  final userViewModel = UserViewModel(
+      userRepo: UserRepository(prefs: await SharedPreferences.getInstance()));
+
+  await userViewModel.init();
+
+  runApp(MultiProvider(
+      providers: [
+        ChangeNotifierProvider<UserViewModel>.value(value: userViewModel),
+      ],
+      child: MaterialApp(
+        title: 'Test Kortobaa',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: HomeScreen(),
+      )));
 }
 
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: appTheme,
-      home: HomeScreen(),
-    );
-  }
-}
 
