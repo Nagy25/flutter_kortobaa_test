@@ -1,0 +1,9 @@
+{
+    "app_name": "أسم التطبيق", 
+    "greeting": "مرحباً, قرطبة",
+    "ar" : "العربية",
+    "en": "English",
+    "user_actions": {
+        "start": "ابدأ"
+    }
+}
