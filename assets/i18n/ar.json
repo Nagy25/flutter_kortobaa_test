@@ -2,8 +2,11 @@
     "app_name": "أسم التطبيق", 
     "greeting": "مرحباً, قرطبة",
     "ar" : "العربية",
-    "en": "English",
+    "lang": "English",
+    "reverse": "en",
     "user_actions": {
         "start": "ابدأ"
-    }
+    },
+    "welcome": "اهلا",
+    "not_logged": "ليس مسجل"
 }
