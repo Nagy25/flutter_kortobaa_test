@@ -1,16 +1,16 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'todo.g.dart';
+part 'to_do.g.dart';
 
 @JsonSerializable()
-class Todo {
-    Todo();
+class ToDo {
+    ToDo();
 
     num userId;
     num id;
     String title;
     bool completed;
     
-    factory Todo.fromJson(Map<String,dynamic> json) => _$TodoFromJson(json);
+    factory ToDo.fromJson(Map<String,dynamic> json) => _$TodoFromJson(json);
     Map<String, dynamic> toJson() => _$TodoToJson(this);
 }
