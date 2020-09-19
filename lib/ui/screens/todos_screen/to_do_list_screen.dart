@@ -1,35 +1,48 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_kortobaa_test/blocs/models/index.dart';
+import 'package:flutter_kortobaa_test/blocs/providers/todo_view_model.dart';
 import 'package:flutter_kortobaa_test/data/remote/controllers/todo_controller.dart';
+import 'package:provider/provider.dart';
 
-class ToDosScreen extends StatelessWidget {
+class ToDosScreen extends StatefulWidget {
 
-  ToDoController _toDoController = ToDoController();
+  @override
+  _ToDosScreenState createState() => _ToDosScreenState();
+}
+
+class _ToDosScreenState extends State<ToDosScreen> {
+  var todoViewModel;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    todoViewModel = Provider.of<ToDoViewModel>(context,listen: false);
+    todoViewModel.init();
+  }
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(),
-      body: FutureBuilder<List<ToDo>>(
-        future: _toDoController.fetchToDos(),
-        builder: (context,snapshot){
-          var todos = snapshot.data;
-          if (todos==null) {
+      body: Consumer<ToDoViewModel>(
+        builder: (context,todos,child){
+          if (todos.todos==null) {
             return Center(
-              child: CircularProgressIndicator(),
+                child: CircularProgressIndicator()
             );
-          }else{
+          }  else{
             return ListView.builder(
-                itemCount:  todos.length,
-                itemBuilder: (context,index){
-                  return ListTile(
-                    title: Text(todos[index].id.toString()),
-                    subtitle: Text(todos[index].title),
-                  );
-                }
-            );
+                itemCount: todos.todos.length,
+                itemBuilder: (context,index)=>ListTile(
+                  title: Text(todos.todos[index].id.toString()),
+                  subtitle: Text(todos.todos[index].title),
+                ));
           }
         },
       ),
     );
   }
+
 }

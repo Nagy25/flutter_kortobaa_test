@@ -1,6 +1,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:flutter_kortobaa_test/blocs/providers/todo_view_model.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'blocs/providers/user_view_model.dart';
@@ -31,6 +32,9 @@ Future<void> main() async {
   runApp(LocalizedApp(delegate,MultiProvider(
     providers: [
       ChangeNotifierProvider<UserViewModel>.value(value: userViewModel),
+      ChangeNotifierProvider<ToDoViewModel>.value(value: ToDoViewModel(
+
+      )),
     ],
       child: MyApp())));
 }
